@@ -1,4 +1,4 @@
-from .models.tts_model import WeNetASR
+from .models.asr_model import WeNetASR
 
 
 class ASRPart:

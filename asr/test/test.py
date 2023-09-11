@@ -1,4 +1,4 @@
-from tts.asr import ASRPart
+from asr.asr import ASRPart
 
 input_wav_file = 'test.wav'
 asr_part = ASRPart()
