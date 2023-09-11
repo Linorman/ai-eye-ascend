@@ -1,4 +1,4 @@
-from ..chat import ChatPart
+from chat.chat import ChatPart
 
 chat_part = ChatPart()
 chat_part.load_model()

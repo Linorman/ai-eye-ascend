@@ -36,9 +36,9 @@ class ChatPart:
         from transformers.generation import LogitsProcessorList, NoRepeatNGramLogitsProcessor, TemperatureLogitsWarper, \
             TopKLogitsWarper, StoppingCriteriaList, MaxLengthCriteria
         print('[INFO]The encoder has been initialized. Initializing the first decoder in progress.')
-        self.first_decoder = onnxruntime.InferenceSession('../models/decoder_first_sim_quant.onnx')
+        self.first_decoder = onnxruntime.InferenceSession('models/decoder_first_sim_quant.onnx')
         print('[INFO]The first decoder has been initialized. Initializing the second decoder in progress.')
-        self.decoder_iter = onnxruntime.InferenceSession('../models/decoder_iter_sim_quant.onnx')
+        self.decoder_iter = onnxruntime.InferenceSession('models/decoder_iter_sim_quant.onnx')
         self.tokenizer = T5Tokenizer.from_pretrained("./tokenizer")
         self.dummy_decoder_input_ids = np.array([[0]], dtype=np.int64)
         self.logits_processor = LogitsProcessorList([NoRepeatNGramLogitsProcessor(3)])

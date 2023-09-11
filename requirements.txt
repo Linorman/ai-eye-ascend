@@ -2,7 +2,10 @@ torch
 transformers==4.26.1
 sentencepiece==0.1.97
 onnxruntime==1.14.0
-numpy
+numpy~=1.25.2
 tqdm
-filelock
+filelock~=3.12.3
+git+https://gitee.com/ascend/tools.git#egg=aclruntime&subdirectory=ais-bench_workload/tool/ais_bench/backend
 git+https://gitee.com/ascend/tools.git#egg=ais_bench&subdirectory=ais-bench_workload/tool/ais_bench
+
+torchaudio~=2.0.2
