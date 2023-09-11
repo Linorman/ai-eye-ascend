@@ -1,0 +1,8 @@
+torch
+transformers==4.26.1
+sentencepiece==0.1.97
+onnxruntime==1.14.0
+numpy
+tqdm
+filelock
+git+https://gitee.com/ascend/tools.git#egg=ais_bench&subdirectory=ais-bench_workload/tool/ais_bench
