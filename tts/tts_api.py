@@ -3,6 +3,18 @@ from huaweicloudsdksis.v1.region.sis_region import SisRegion
 from huaweicloudsdkcore.exceptions import exceptions
 from huaweicloudsdksis.v1 import *
 
+import base64
+import wave
+
+
+def base64_to_wav(base64_data, output_path):
+    audio_bytes = base64.b64decode(base64_data)
+    with wave.open(output_path, 'wb') as wav_file:
+        wav_file.setnchannels(1)
+        wav_file.setsampwidth(2)
+        wav_file.setframerate(16000)
+        wav_file.writeframes(audio_bytes)
+
 
 class TTSApi:
     def __init__(self, ak, sk, region="cn-east-3"):
