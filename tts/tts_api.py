@@ -1,30 +1,38 @@
-import requests
+from huaweicloudsdkcore.auth.credentials import BasicCredentials
+from huaweicloudsdksis.v1.region.sis_region import SisRegion
+from huaweicloudsdkcore.exceptions import exceptions
+from huaweicloudsdksis.v1 import *
 
 
 class TTSApi:
-    def __init__(self, project_id, auth):
-        self.url = "https://sis-ext.cn-east-3.myhuaweicloud.com/v1/" + project_id + "/tts"
-        self.headers = {
-            'Authorization': auth
-        }
+    def __init__(self, ak, sk, region="cn-east-3"):
+        credentials = BasicCredentials(ak, sk)
 
-    def generate_speech(self, input, audio_format='wav', sample_rate='16000', property='chinese_huaxiaoliang_common',
-                        speed=0, pitch=0, volume=50):
-        payload = {
-            "text": input,
-            "config": {
-                "audio_format": audio_format,
-                "sample_rate": sample_rate,
-                "property": property,
-                "speed": speed,
-                "pitch": pitch,
-                "volume": volume
-            }
-        }
+        self.client = SisClient.new_builder() \
+            .with_credentials(credentials) \
+            .with_region(SisRegion.value_of(region)) \
+            .build()
 
-        response = requests.request("POST", self.url, headers=self.headers, data=payload)
-
-        if response.status_code == 200:
-            return response.content
-        else:
-            raise Exception("Speech generation failed. Status code: {}".format(response.status_code))
+    def generate_tts(self, text, audio_format="wav", sample_rate="16000", property="chinese_huaxiaoliang_common",
+                     speed=0, pitch=0, volume=50):
+        try:
+            request = RunTtsRequest()
+            configbody = TtsConfig(
+                audio_format=audio_format,
+                sample_rate=sample_rate,
+                _property=property,
+                speed=speed,
+                pitch=pitch,
+                volume=volume
+            )
+            request.body = PostCustomTTSReq(
+                config=configbody,
+                text=text
+            )
+            response = self.client.run_tts(request)
+            return response
+        except exceptions.ClientRequestException as e:
+            print(e.status_code)
+            print(e.request_id)
+            print(e.error_code)
+            print(e.error_msg)
