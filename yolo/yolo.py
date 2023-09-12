@@ -149,7 +149,7 @@ class Model(ABC):
 
 
 class YoloV5(Model):
-    def __init__(self, model_path):
+    def __init__(self, model_path='./model/yolov5s_bs1.om'):
         super().__init__(model_path)
         self.neth = 640  # 缩放的目标高度, 也即模型的输入高度
         self.netw = 640  # 缩放的目标宽度, 也即模型的输入宽度
