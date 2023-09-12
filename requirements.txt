@@ -12,3 +12,4 @@ torchaudio~=2.0.2
 torchvision~=0.15.2
 opencv-python~=4.8.0.76
 acl==0.2
+requests~=2.31.0
